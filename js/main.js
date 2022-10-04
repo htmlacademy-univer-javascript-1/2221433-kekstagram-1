@@ -50,7 +50,6 @@ const DESCRIPTIONS = [
  let imagesDescriptions = [];
 
  for (let i = 1; i <= IMAGES_COUNT; i++) {
-    let countMessages = getRandomPositiveInteger(1,2);
     imagesDescriptions.push({
       id: i,
       url: `photos/${i}.jpg`,
