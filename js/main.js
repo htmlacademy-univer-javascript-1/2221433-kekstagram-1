@@ -10,7 +10,7 @@ function checkStringLength (string, length) {
 };
 
 let getRandomArrayElement = function (elements) {
-    return elements[getRandomNumber(0, elements.length - 1)];
+    return elements[getRandomPositiveInteger(0, elements.length - 1)];
 };
 
 const NAMES = [
@@ -50,6 +50,7 @@ const DESCRIPTIONS = [
  let imagesDescriptions = [];
 
  for (let i = 1; i <= IMAGES_COUNT; i++) {
+    let countMessages = getRandomPositiveInteger(1,2);
     imagesDescriptions.push({
       id: i,
       url: `photos/${i}.jpg`,
