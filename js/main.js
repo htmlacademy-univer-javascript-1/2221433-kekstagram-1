@@ -1,4 +1,8 @@
 
+import {imagesDescriptions} from './data.js';
+console.log(imagesDescriptions);
+=======
+
 function getRandomPositiveInteger (a, b) {
     const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
     const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
@@ -64,3 +68,4 @@ const DESCRIPTIONS = [
     }]
   })
 }
+
