@@ -1,55 +1,53 @@
+import { onFormInput as onFormSubmit, resetForm} from './validate_form.js';
 import { isEscape } from './util.js';
-import { validateForm } from './validate-form.js';
+import { setDefaultScale } from './zoom.js';
+import { setDefaultEffect } from './effects.js';
 
-const formPicture = document.querySelector('#upload-select-image');
-const inputImage = document.querySelector('#upload-file');
-const valueInputImage = inputImage.getAttribute('value');
-const body = document.querySelector('body');
-const form = document.querySelector('.img-upload__overlay');
-const formClose = document.querySelector('.img-upload__cancel');
-const hashtags = document.querySelector('.text__hashtags');
-const description = document.querySelector('.text__description');
-
-const resetFormInput = () => {
-  inputImage.value = valueInputImage;
-  description.value = '';
-  hashtags.value = '';
-};
+const form = document.querySelector('.img-upload__form');
+const imageOverlay = form.querySelector('.img-upload__overlay');
+const uploadingField = form.querySelector('#upload-file');
+const closingButton = form.querySelector('#upload-cancel');
 
 const closeForm = () => {
-  form.classList.add('hidden');
-  body.classList.remove('modal-open');
-  resetFormInput();
-  removeEventListenerForm();
+  imageOverlay.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+
+  uploadingField.value = '';
+  form.querySelector('.text__hashtags').value = '';
+  form.querySelector('.text__description').value = '';
+  resetForm();
+
+  form.removeEventListener('submit', onFormSubmit);
 };
 
+const onCloseClick = () => {
+  closeForm();
+  closingButton.removeEventListener('click', onCloseClick);
+};
 
-const closeFormByEsc = (evt) => {
-  const activeElem = document.activeElement;
-  if (isEscape(evt) && activeElem !== hashtags && activeElem !== description) {
-    closeForm();
+const onClosingButtonClick = () => onCloseClick();
+
+const isNotTarget = (evt) => !evt.target.classList.contains('text__hashtags')
+&& !evt.target.classList.contains('text__description');
+
+const onDocumentEscKeyDown = (evt) => {
+  if(isEscape(evt) && isNotTarget(evt)){
+    onCloseClick();
+    document.removeEventListener('keydown', onDocumentEscKeyDown);
   }
 };
 
+const onUploadingFieldInput = () => {
+  setDefaultScale();
+  setDefaultEffect();
 
-const removeEventListenerForm = () => {
-  formClose.removeEventListener('clock', closeForm);
-  document.removeEventListener('keydown', closeFormByEsc);
-  formPicture.removeEventListener('submit', validateForm);
+  imageOverlay.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+  closingButton.addEventListener('click', onClosingButtonClick);
+  document.addEventListener('keydown', onDocumentEscKeyDown);
+  form.addEventListener('submit', onFormSubmit);
 };
 
+uploadingField.addEventListener('input', onUploadingFieldInput);
 
-const  addEvtToForm = () => {
-  formClose.addEventListener('click', closeForm);
-  document.addEventListener('keydown', closeFormByEsc);
-  formPicture.addEventListener('submit', validateForm);
-};
-
-
-inputImage.addEventListener('change', function () {
-  if(this.value) {
-    body.classList.add('modal-open');
-    form.classList.remove('hidden');
-    addEvtToForm();
-  }
-});
+export {closeForm, onDocumentEscKeyDown};
