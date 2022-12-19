@@ -3,6 +3,8 @@ import './render.js';
 import './util.js';
 import './big_picture.js';
 import './form.js';
+import './zoom.js';
+import './effects.js';
 
 function getRandomPositiveInteger (a, b) {
     const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
