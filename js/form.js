@@ -1,3 +1,4 @@
+
 import { onFormInput as onFormSubmit, resetForm} from './validate-form.js';
 import { isEscape } from './util.js';
 import { setDefaultScale } from './zoom.js';
@@ -29,7 +30,6 @@ const onClosingButtonClick = () => onCloseClick();
 
 const isNotTarget = (evt) => !evt.target.classList.contains('text__hashtags')
 && !evt.target.classList.contains('text__description');
-
 const onDocumentEscKeyDown = (evt) => {
   if(isEscape(evt) && isNotTarget(evt)){
     onCloseClick();
