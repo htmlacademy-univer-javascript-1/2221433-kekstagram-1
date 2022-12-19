@@ -1,17 +1,14 @@
 import {arrayObject} from './data.js';
-import {showBigPicture} from './big_picture.js';
 
 const pictureTemplate = document.querySelector('#picture').content;
 const newPictureTemplate = pictureTemplate.querySelector('.picture');
 const pictureContainer = document.querySelector('.pictures');
 
-
-const getPhotoElement =({url, likes, comments}) => {
+const getPhotoElement = ({url, likes, comments}) => {
   const clonedPicture = newPictureTemplate.cloneNode(true);
   clonedPicture.querySelector('img').src = url;
-  clonedPicture.querySelector('.picture__likes').textContent = likes;
   clonedPicture.querySelector('.picture__comments').textContent = comments.length;
-  clonedPicture.addEventListener('click', () => showBigPicture({url, likes, comments}));
+  clonedPicture.querySelector('.picture__likes').textContent = likes;
   return clonedPicture;
 };
 
