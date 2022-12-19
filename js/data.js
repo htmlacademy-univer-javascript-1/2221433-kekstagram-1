@@ -1,4 +1,3 @@
-
 import { getRandomPositiveInteger } from './util.js';
 
 const COUNT = 25;
@@ -61,8 +60,8 @@ const commentArray = (count) => {
   return array;
 };
 addPhotos();
+
 export{arrayObject};
-=======
 import {getRandomPositiveInteger} from './util.js';
 const getRandomArrayElement = function (elements) {
   return elements[getRandomPositiveInteger(0, elements.length - 1)];
@@ -115,3 +114,4 @@ const DESCRIPTIONS = [
 }
 
 export {imagesDescriptions};
+
