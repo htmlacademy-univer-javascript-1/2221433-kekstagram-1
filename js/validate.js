@@ -36,6 +36,7 @@ const validateHashtag = (value) => {
     return true;
   }
 
+
   const rules = [
     {
       check: inputArray.some((item) => (item[0] === '#' && item.length === 1)),
@@ -83,6 +84,7 @@ const onFormInput = (evt) => {
 
   if(pristine.validate()){
     sendData();
+
   }
 };
 

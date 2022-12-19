@@ -3,7 +3,6 @@ import { isEscape } from './util.js';
 import { numDecline } from './number.js';
 
 const COMMENTS_STEP = 5;
-
 const bigPicture = document.querySelector('.big-picture');
 const commentCounter = document.querySelector('.social__comment-count');
 const commentLoader = document.querySelector('.comments-loader');
@@ -29,8 +28,10 @@ const addComments = () => {
     commentLoader.classList.remove('hidden');
   }
 
+
   const commentsDecline = numDecline(currentComments.length, 'комментария', 'комментариев', 'комментариев');
   commentCounter.textContent = `${currentIndex} из ${currentComments.length} ${commentsDecline}`;
+
 
   commentsSelected.forEach((comment) => {
     comments.appendChild(createComment(comment, commentTemplate));

@@ -28,3 +28,4 @@ const onFail = () => {
 };
 
 sendRequest(onSuccess, onFail, 'GET');
+
