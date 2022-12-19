@@ -4,6 +4,7 @@ import { openBigPicture } from './big_picture.js';
 const picturesBlock = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
+
 const fragment = document.createDocumentFragment();
 
 const renderPhoto = (photo) => {
@@ -17,8 +18,8 @@ const renderPhoto = (photo) => {
 
     openBigPicture(photo);
   });
-
   return element;
+
 };
 
 const renderPhotos = () => {
