@@ -47,7 +47,6 @@ const onUploadingFieldInput = () => {
   document.addEventListener('keydown', onDocumentEscKeyDown);
   form.addEventListener('submit', onFormSubmit);
 };
-
 uploadingField.addEventListener('input', onUploadingFieldInput);
 
 export {closeForm, onDocumentEscKeyDown};
