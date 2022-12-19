@@ -1,4 +1,9 @@
 
+import './data.js';
+import './render.js';
+import './util.js';
+=======
+
 import {imagesDescriptions} from './data.js';
 console.log(imagesDescriptions);
 =======
