@@ -1,35 +1,30 @@
-
-import { onFormInput as onFormSubmit, resetForm} from './validate-form.js';
+import { onFormInput, resetForm } from './validate-form.js';
 import { isEscape } from './util.js';
-import { setDefaultScale } from './zoom.js';
-import { setDefaultEffect } from './effects.js';
 
 const form = document.querySelector('.img-upload__form');
-const imageOverlay = form.querySelector('.img-upload__overlay');
-const uploadingField = form.querySelector('#upload-file');
-const closingButton = form.querySelector('#upload-cancel');
+const imageOverlay = document.querySelector('.img-upload__overlay');
+const uploadFileButton = document.querySelector('#upload-file');
+const cancelButton = document.querySelector('#upload-cancel');
+const hashtags = document.querySelector('.text__hashtags');
+const comment = document.querySelector('.text__description');
 
-const closeForm = () => {
+const onCloseClick = () => {
   imageOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
 
-  uploadingField.value = '';
-  form.querySelector('.text__hashtags').value = '';
-  form.querySelector('.text__description').value = '';
+  uploadFileButton.value = '';
+  hashtags.value = '';
+  comment.value = '';
+
   resetForm();
 
-  form.removeEventListener('submit', onFormSubmit);
+  form.removeEventListener('submit', onFormInput);
+  cancelButton.removeEventListener('click', onCloseClick);
 };
-
-const onCloseClick = () => {
-  closeForm();
-  closingButton.removeEventListener('click', onCloseClick);
-};
-
-const onClosingButtonClick = () => onCloseClick();
 
 const isNotTarget = (evt) => !evt.target.classList.contains('text__hashtags')
 && !evt.target.classList.contains('text__description');
+
 const onDocumentEscKeyDown = (evt) => {
   if(isEscape(evt) && isNotTarget(evt)){
     onCloseClick();
@@ -37,17 +32,12 @@ const onDocumentEscKeyDown = (evt) => {
   }
 };
 
-const onUploadingFieldInput = () => {
+const onFileInput = () => {
   imageOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  closingButton.addEventListener('click', onClosingButtonClick);
+  cancelButton.addEventListener('click', onCloseClick);
   document.addEventListener('keydown', onDocumentEscKeyDown);
-  form.addEventListener('submit', onFormSubmit);
-
-  setDefaultScale();
-  setDefaultEffect();
+  form.addEventListener('submit', onFormInput);
 };
 
-uploadingField.addEventListener('input', onUploadingFieldInput);
-
-export {closeForm, onDocumentEscKeyDown};
+uploadFileButton.addEventListener('input', onFileInput);
